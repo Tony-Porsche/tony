@@ -130,6 +130,15 @@ section{ padding: 96px 0; }
   color: #fff;
   text-decoration: none;
   letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wordmark-logo{
+  height: 22px;
+  width: auto;
+  display: block;
 }
 
 .wordmark small{
