@@ -299,7 +299,7 @@ section{ padding: 96px 0; }
 }
 .page-banner .eyebrow{ color: var(--amber); }
 .page-banner h1{
-  color: #fff;
+  color: #008080;
   font-size: clamp(1.9rem, 3.6vw, 2.6rem);
 }
 .page-banner p{ color: var(--paper-on-teal); margin-top: 14px; max-width: 52ch; }
