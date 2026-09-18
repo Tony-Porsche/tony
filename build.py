@@ -294,6 +294,10 @@ def about_body(lang):
 """
 
 
+# Comme pour PROJECTS : "year" est volontairement partagé (une date ne se
+# traduit pas). "title_fr"/"title_en" et "co_fr"/"co_en" sont indépendants —
+# modifier l'un ne change jamais l'autre, même quand leur contenu se
+# ressemble (ex. un titre de papier resté en français des deux côtés).
 PAPERS = [
     {"year": "2024", "title_fr": "Bioenergy and Land Use", "title_en": "Bioenergy and Land Use", "co_fr": "", "co_en": ""},
     {"year": "2024", "title_fr": "Dualité dans les industries de réseau",
@@ -352,42 +356,53 @@ def research_body(lang):
 """
 
 
+# Chaque projet porte SES DEUX langues explicitement (suffixe _fr / _en) :
+# modifier l'une ne touche jamais l'autre. Seul "url" (le lien externe) est
+# volontairement partagé, car un lien Streamlit/Tableau/Power BI ne se traduit
+# pas — c'est la même adresse quelle que soit la langue de la page.
 PROJECTS = [
-    {"tag": "Streamlit", "title": "Index des projets", "title_en": "Project index",
+    {"tag_fr": "Streamlit", "tag_en": "Streamlit",
+     "title_fr": "Index des projets", "title_en": "Project index",
      "desc_fr": "Portail regroupant l'ensemble des projets ci-dessous, déployé avec Streamlit.",
      "desc_en": "A portal gathering every project below, deployed with Streamlit.",
      "url": "https://sylvainndri-ndri-index-3czarp.streamlit.app/",
      "link_fr": "Ouvrir le portail", "link_en": "Open the portal"},
-    {"tag": "Risque de crédit", "tag_en": "Credit risk", "title": "IFRS 9 & Stress Test",
-     "title_en": "IFRS 9 & Stress Test",
+    {"tag_fr": "Risque de crédit", "tag_en": "Credit risk",
+     "title_fr": "IFRS 9 & Stress Test", "title_en": "IFRS 9 & Stress Test",
      "desc_fr": "Modélisation du provisionnement des pertes de crédit attendues et scénarios de stress "
                 "test bancaire.",
      "desc_en": "Expected credit loss provisioning model and bank stress-test scenarios.",
      "url": None},
-    {"tag": "Machine learning", "title": "Classification multiclasse", "title_en": "Multiclass classification",
+    {"tag_fr": "Machine learning", "tag_en": "Machine learning",
+     "title_fr": "Classification multiclasse", "title_en": "Multiclass classification",
      "desc_fr": "Modèle de classification multiclasse appliqué à des données réelles.",
      "desc_en": "A multiclass classification model applied to real-world data.",
      "url": None},
-    {"tag": "Machine learning", "title": "Prédiction du prix des maisons", "title_en": "House price prediction",
+    {"tag_fr": "Machine learning", "tag_en": "Machine learning",
+     "title_fr": "Prédiction du prix des maisons", "title_en": "House price prediction",
      "desc_fr": "Modèle de prédiction du prix des maisons à partir de caractéristiques structurelles et "
                 "de localisation.",
      "desc_en": "A house-price prediction model based on structural and location features.",
      "url": None},
-    {"tag": "Tableau Public", "title": "Tableau de bord", "title_en": "Dashboard",
+    {"tag_fr": "Tableau Public", "tag_en": "Tableau Public",
+     "title_fr": "Tableau de bord", "title_en": "Dashboard",
      "desc_fr": "Tableau de bord interactif publié sur Tableau Public.",
      "desc_en": "Interactive dashboard published on Tableau Public.",
      "url": "https://public.tableau.com/app/profile/tony5276/viz/Tableaudebord_16713179649930/Tableaudebord",
      "link_fr": "Voir sur Tableau Public", "link_en": "View on Tableau Public"},
-    {"tag": "Tableau Public", "title": "Tableau de bord 1 — marchés", "title_en": "Dashboard 1 — markets",
+    {"tag_fr": "Tableau Public", "tag_en": "Tableau Public",
+     "title_fr": "Tableau de bord 1 — marchés", "title_en": "Dashboard 1 — markets",
      "desc_fr": "Suivi de données boursières, tableau de bord n°1 sur Tableau Public.",
      "desc_en": "Stock market data tracking, dashboard #1 on Tableau Public.",
      "url": "https://public.tableau.com/app/profile/tony5276/viz/Stock_16720822769790/Tableaudebord1",
      "link_fr": "Voir sur Tableau Public", "link_en": "View on Tableau Public"},
-    {"tag": "Tableau Public", "title": "Tableau de bord 2", "title_en": "Dashboard 2",
+    {"tag_fr": "Tableau Public", "tag_en": "Tableau Public",
+     "title_fr": "Tableau de bord 2", "title_en": "Dashboard 2",
      "desc_fr": "Tableau de bord n°2, complément d'analyse sur Tableau Public.",
      "desc_en": "Dashboard #2, a follow-up analysis on Tableau Public.",
      "url": None},
-    {"tag": "Power BI", "title": "Tableau de bord Power BI", "title_en": "Power BI dashboard",
+    {"tag_fr": "Power BI", "tag_en": "Power BI",
+     "title_fr": "Tableau de bord Power BI", "title_en": "Power BI dashboard",
      "desc_fr": "Tableau de bord construit avec Power BI.",
      "desc_en": "Dashboard built with Power BI.",
      "url": None},
@@ -403,8 +418,8 @@ def projects_body(lang):
 
     cards = []
     for p in PROJECTS:
-        tag = p["tag"] if fr else p.get("tag_en", p["tag"])
-        title_txt = p["title"] if fr else p["title_en"]
+        tag = p["tag_fr"] if fr else p["tag_en"]
+        title_txt = p["title_fr"] if fr else p["title_en"]
         desc = p["desc_fr"] if fr else p["desc_en"]
         link_html = ""
         if p["url"]:
