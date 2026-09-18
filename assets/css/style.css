@@ -12,7 +12,7 @@
   --paper-2:    #e4e7db;
   --line:       #c9cdba;
   --teal:       #17332e;
-  --teal-2:     #204540;
+  --teal-2:     ##008080;
   --paper-on-teal: #dfe6de;
   --amber:      #e2a33b;
   --amber-dim:  #b9822c;
@@ -299,7 +299,7 @@ section{ padding: 96px 0; }
 }
 .page-banner .eyebrow{ color: var(--amber); }
 .page-banner h1{
-  color: #008080;
+  color: #fff;
   font-size: clamp(1.9rem, 3.6vw, 2.6rem);
 }
 .page-banner p{ color: var(--paper-on-teal); margin-top: 14px; max-width: 52ch; }
