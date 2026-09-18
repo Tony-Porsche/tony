@@ -25,6 +25,7 @@ GitHub Pages.
 │   ├── css/style.css      design (couleurs, typographie, mise en page)
 │   ├── js/script.js       menu mobile uniquement
 │   ├── img/portrait.png   photo de profil
+│   ├── img/logo.png       logo (affiché dans l'en-tête, sur les 12 pages)
 │   └── cv/                déposez ici vos fichiers CV (voir ci-dessous)
 ├── build.py              script qui a généré les 12 pages (facultatif à garder)
 └── README.md

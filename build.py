@@ -114,7 +114,10 @@ def base_page(lang, current, body_html, extra_head=""):
 
 <header class="site-header">
   <nav class="nav">
-    <a class="wordmark" href="{home_href}">N'Goran Sylvain N'DRI<small>{role_word}</small></a>
+    <a class="wordmark" href="{home_href}">
+      <img class="wordmark-logo" src="{asset(lang, 'img/logo.png')}" alt="" width="126" height="22" style="height:22px;width:auto;display:block;">
+      <span>N'Goran Sylvain<small>{role_word}</small></span>
+    </a>
     <button class="nav-toggle" aria-expanded="false" aria-label="{menu_label}">☰</button>
     <ul class="nav-links">
       {build_nav(lang, current)}
