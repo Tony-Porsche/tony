@@ -19,7 +19,7 @@
   <nav class="nav">
     <a class="wordmark" href="index.html">
       <img class="wordmark-logo" src="../assets/img/logo.png" alt="" width="126" height="22" style="height:22px;width:auto;display:block;">
-      <span>N'Goran Sylvain<small>Energy Economist</small></span>
+      <span>N'Goran Sylvain N'DRI<small>Energy Economist</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-label="Open menu">☰</button>
     <ul class="nav-links">
@@ -27,6 +27,7 @@
       <li><a href="about.html">About</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
       <li><a href="cv.html">CV</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a class="lang-link" href="../index.html">FR</a></li>
@@ -36,65 +37,107 @@
 
 <main id="main">
 
-  <section class="hero">
+  <section class="hero banner-photo" style="background-image:url('../assets/img/banners/home.jpg');">
     <div class="container">
+
       <div class="hero-text">
-        <span class="hero-eyebrow">Energy Economist · PhD Candidate, Université de Sherbrooke</span>
-        <h1>Making economics count in the <em>energy transition</em></h1>
-        <p class="hero-lede">I study the financial incentives, critical minerals, and electricity markets that determine how fast the world moves away from fossil fuels.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="research.html">See my research</a>
-          <a class="btn btn-ghost" href="about.html">More about me</a>
-        </div>
+        <h1>Welcome to the page</h1>
+        <p class="hero-lede">Energy Economist, PhD Candidate à l'Université de Sherbrooke.</p>
       </div>
-      
-      <div class="hero-chart" aria-hidden="true">
-        <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="255" x2="460" y2="255" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-          <g stroke="rgba(255,255,255,0.18)" stroke-width="1">
-            <line x1="0" y1="255" x2="0" y2="262"/>
-            <line x1="76" y1="255" x2="76" y2="262"/>
-            <line x1="152" y1="255" x2="152" y2="262"/>
-            <line x1="228" y1="255" x2="228" y2="262"/>
-            <line x1="304" y1="255" x2="304" y2="262"/>
-            <line x1="380" y1="255" x2="380" y2="262"/>
-            <line x1="456" y1="255" x2="456" y2="262"/>
-          </g>
-          <path d="M0,60 C 90,75 150,120 220,165 C 300,205 360,235 460,248"
-                fill="none" stroke="var(--fossil)" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M0,240 C 90,225 150,190 220,150 C 300,100 360,60 460,35"
-                fill="none" stroke="var(--renew)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="222" cy="158" r="4.5" fill="var(--amber)"/>
-          <line x1="222" y1="158" x2="222" y2="255" stroke="var(--amber)" stroke-width="1" stroke-dasharray="3 4"/>
-          <text x="228" y="272" fill="var(--amber)" font-family="IBM Plex Mono, monospace" font-size="11">tipping point</text>
-          <circle cx="460" cy="248" r="3.5" fill="var(--fossil)"/>
-          <circle cx="460" cy="35" r="3.5" fill="var(--renew)"/>
-        </svg>
-        <div class="chart-caption">
-          <span><i class="dot" style="background:var(--fossil)"></i><span>fossil share</span></span>
-          <span><i class="dot" style="background:var(--renew)"></i><span>renewable share</span></span>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <section class="home-intro">
-    <div class="container">
-      <div>
-        <p style="font-weight:600;color:var(--teal);margin-bottom:10px;">PhD candidate in Economics at Université de Sherbrooke, Québec (Canada)</p>
-        <p>I am an economist specializing in the energy transition and the adoption of low-carbon technologies — financial incentives, critical minerals, intermittent renewable integration, and how electricity markets function.</p>
-      </div>
-      <a class="btn btn-outline" href="about.html">Read my full background</a>
+<section class="home-intro">
+  <div class="container home-intro-content">
+
+    <!-- Photo à gauche -->
+    <div class="home-photo">
+      <img src="../assets/img/portrait.png" alt="N'Goran Sylvain N'DRI">
     </div>
-  </section>
+
+    <!-- Texte à droite -->
+    <div class="home-text">
+      <p style="font-weight:600;color:var(--teal);margin-bottom:10px;">
+        Doctorant en économie at University of Sherbrooke, au Québec (Canada)
+      </p>
+
+      <p>
+        My research focuses on financial incentives, the energy transition, energy markets, and climate shocks.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="research.html">
+          See my research
+        </a>
+
+        <a class="btn btn-outline" href="about.html">
+          Learn more about me
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 </main>
 
 <footer class="site-footer">
   <div class="container">
+
+<div style="text-align:center; margin-top:20px;">
+
+    <a href="https://www.linkedin.com/in/sylvainndri/"
+       target="_blank"
+       style="
+           display:inline-block;
+           margin:8px;
+           padding:12px 25px;
+           background:#ffffff;
+           color:#0A66C2;
+           text-decoration:none;
+           border-radius:30px;
+           font-weight:bold;
+           border:2px solid #0A66C2;">
+        LinkedIn
+    </a>
+
+    <a href="https://orcid.org/0009-0001-8800-6380"
+       target="_blank"
+       style="
+           display:inline-block;
+           margin:8px;
+           padding:12px 25px;
+           background:#ffffff;
+           color:#0A66C2;
+           text-decoration:none;
+           border-radius:30px;
+           font-weight:bold;
+           border:2px solid #0A66C2;">
+        ORCID
+    </a>
+
+    <a href="https://www.researchgate.net/profile/Ngoran-Sylvain-Ndri"
+       target="_blank"
+       style="
+           display:inline-block;
+           margin:8px;
+           padding:12px 25px;
+           background:#ffffff;
+           color:#0A66C2;
+           text-decoration:none;
+           border-radius:30px;
+           font-weight:bold;
+           border:2px solid #0A66C2;">
+        ResearchGate
+    </a>
+
+</div>
+
+    <!-- Copyright -->
     <span>© 2026 N'Goran Sylvain N'DRI — All rights reserved.</span>
-    <span>Site built for GitHub Pages</span>
+    <span>Powered by TonyPorsche.</span>
+
+
   </div>
 </footer>
 
