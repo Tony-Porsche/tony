@@ -11,10 +11,10 @@
   --paper:      #eef0e7;
   --paper-2:    #e4e7db;
   --line:       #c9cdba;
-  --teal:       #006D6D;
+  --teal:       #546D79;
   --teal-2:     #204540;
   --paper-on-teal: #dfe6de;
-  --amber:      #e2a33b;
+  --amber:       #111827;
   --amber-dim:  #b9822c;
   --fossil:     #8a7a63;
   --renew:      #3f8f68;
@@ -203,21 +203,47 @@ section{ padding: 96px 0; }
   cursor: pointer;
 }
 
-/* -------------------- Hero (page d'accueil) -------------------- */
-.hero{
-  background: var(--teal);
-  color: var(--paper-on-teal);
-  padding: 88px 0 110px;
+/* -------------------- Bannières photo (hero + pages internes + contact) --------
+   Chaque section peut recevoir sa propre photo de fond via un style="" inline
+   (background-image). Un dégradé sombre (::before) garde le texte lisible
+   par-dessus n'importe quelle image ; tant qu'aucune photo n'est fournie,
+   c'est simplement le fond --teal qui s'affiche. */
+.banner-photo{
+  background-color: var(--teal);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
-  overflow: hidden;
 }
 
-.hero .container{
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 56px;
-  align-items: center;
+.banner-photo::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(15,26,22,0.88) 0%, rgba(15,26,22,0.6) 45%, rgba(15,26,22,0.3) 100%),
+    linear-gradient(180deg, rgba(23,51,46,0.35) 0%, rgba(15,26,22,0.75) 100%);
+  pointer-events: none;
 }
+
+.banner-photo > .container,
+.banner-photo > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* -------------------- Hero (page d'accueil) -------------------- */
+.hero{
+  color: var(--paper-on-teal);
+  padding: 150px 0 96px;
+  min-height: 56vh;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero .container{ max-width: 1120px; }
+
+.hero-text{ max-width: 640px; }
 
 .hero-eyebrow{
   font-family: var(--font-mono);
@@ -268,20 +294,6 @@ section{ padding: 96px 0; }
 .btn-outline{ background: transparent; color: var(--teal); border-color: var(--teal); }
 .btn-outline:hover{ background: var(--teal); color: #fff; }
 
-.hero-chart{ position: relative; }
-.hero-chart svg{ width: 100%; height: auto; overflow: visible; }
-
-.chart-caption{
-  display: flex;
-  gap: 22px;
-  margin-top: 14px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--paper-on-teal);
-}
-.chart-caption span{ display: inline-flex; align-items: center; gap: 7px; }
-.dot{ width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-
 .home-intro{ padding: 88px 0; }
 .home-intro .container{
   display: grid;
@@ -293,9 +305,8 @@ section{ padding: 96px 0; }
 
 /* -------------------- Page banner (pages internes) -------------------- */
 .page-banner{
-  background: var(--teal);
   color: var(--paper-on-teal);
-  padding: 64px 0;
+  padding: 90px 0 72px;
 }
 .page-banner .eyebrow{ color: var(--amber); }
 .page-banner h1{
@@ -449,10 +460,105 @@ section{ padding: 96px 0; }
 .site-footer .container{ display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .site-footer a{ color: var(--amber); text-decoration: none; }
 
+
+
+
+.site-footer {
+  background-color: #333333;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.site-footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid #546D79;
+  border-radius: 4px;
+  color: #546D79;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+
+.footer-links a:hover {
+  background-color: #546D79;
+  color: #fff;
+}
+
+/*--------------------------------- social list ---------------------------*/
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 110px;
+  height: 34px;
+  box-sizing: border-box;
+
+  /* Contour bleu */
+  border: 1px solid #546D79;
+
+  /* Fond blanc */
+  background-color: #FFFFFF;
+
+  /* Texte bleu */
+  color: #546D79;
+
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  transition: all 0.2s ease;
+}
+
+.footer-links a:hover {
+  background-color: #546D79;
+  color: #FFFFFF;
+}
+
+
+.social-list .hint {
+  display: none;
+}
+
+
 /* -------------------- Responsive -------------------- */
 @media (max-width: 860px){
-  .hero .container{ grid-template-columns: 1fr; }
-  .hero-chart{ order: -1; }
+  .hero{ padding: 120px 0 72px; min-height: 46vh; }
   .about-grid{ grid-template-columns: 1fr; }
   .about-portrait img{ max-width: 200px; }
   .contact-grid{ grid-template-columns: 1fr; }
