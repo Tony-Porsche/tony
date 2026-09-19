@@ -8,13 +8,14 @@ import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
-PAGES = ["home", "about", "research", "projects", "cv", "contact"]
+PAGES = ["home", "about", "research", "projects", "blog", "cv", "contact"]
 
 FR_FILES = {
     "home": "index.html",
     "about": "a-propos.html",
     "research": "recherche.html",
     "projects": "projets.html",
+    "blog": "blog.html",
     "cv": "cv.html",
     "contact": "contact.html",
 }
@@ -23,15 +24,16 @@ EN_FILES = {
     "about": "about.html",
     "research": "research.html",
     "projects": "projects.html",
+    "blog": "blog.html",
     "cv": "cv.html",
     "contact": "contact.html",
 }
 
 NAV_LABELS = {
     "fr": {"home": "Accueil", "about": "À propos", "research": "Recherche",
-           "projects": "Projets", "cv": "CV", "contact": "Contact"},
+           "projects": "Projets", "blog": "Blog", "cv": "CV", "contact": "Contact"},
     "en": {"home": "Home", "about": "About", "research": "Research",
-           "projects": "Projects", "cv": "CV", "contact": "Contact"},
+           "projects": "Projects", "blog": "Blog", "cv": "CV", "contact": "Contact"},
 }
 
 TITLES = {
@@ -40,6 +42,7 @@ TITLES = {
         "about": "À propos — N'Goran Sylvain N'DRI",
         "research": "Recherche — N'Goran Sylvain N'DRI",
         "projects": "Projets — N'Goran Sylvain N'DRI",
+        "blog": "Blog — N'Goran Sylvain N'DRI",
         "cv": "CV — N'Goran Sylvain N'DRI",
         "contact": "Contact — N'Goran Sylvain N'DRI",
     },
@@ -48,6 +51,7 @@ TITLES = {
         "about": "About — N'Goran Sylvain N'DRI",
         "research": "Research — N'Goran Sylvain N'DRI",
         "projects": "Projects — N'Goran Sylvain N'DRI",
+        "blog": "Blog — N'Goran Sylvain N'DRI",
         "cv": "CV — N'Goran Sylvain N'DRI",
         "contact": "Contact — N'Goran Sylvain N'DRI",
     },
@@ -63,6 +67,28 @@ FONT_LINK = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 def asset(lang, path):
     prefix = "../" if lang == "en" else ""
     return prefix + "assets/" + path
+
+
+# Chaque section a sa propre photo de bannière, déposée par vous dans
+# assets/img/banners/. Tant que le fichier n'existe pas, la bannière
+# affiche simplement le fond vert sapin (--teal) en dégradé — rien ne
+# casse, elle a juste l'air "sans photo" en attendant.
+BANNER_IMAGES = {
+    "home": "home.jpg",
+    "about": "about.jpg",
+    "research": "research.jpg",
+    "projects": "projects.jpg",
+    "blog": "blog.jpg",
+    "cv": "cv.jpg",
+    "contact": "contact.jpg",
+}
+
+
+def banner_style(lang, page):
+    """Attribut style="" prêt à coller sur la section bannière d'une page,
+    qui pointe vers sa photo de fond dédiée."""
+    url = asset(lang, "img/banners/" + BANNER_IMAGES[page])
+    return f"background-image:url('{url}');"
 
 
 def page_href(lang, page):
@@ -116,7 +142,7 @@ def base_page(lang, current, body_html, extra_head=""):
   <nav class="nav">
     <a class="wordmark" href="{home_href}">
       <img class="wordmark-logo" src="{asset(lang, 'img/logo.png')}" alt="" width="126" height="22" style="height:22px;width:auto;display:block;">
-      <span>N'Goran Sylvain<small>{role_word}</small></span>
+      <span>N'Goran Sylvain N'DRI<small>{role_word}</small></span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-label="{menu_label}">☰</button>
     <ul class="nav-links">
@@ -142,37 +168,6 @@ def base_page(lang, current, body_html, extra_head=""):
 """
 
 
-HERO_SVG = """
-      <div class="hero-chart" aria-hidden="true">
-        <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="255" x2="460" y2="255" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
-          <g stroke="rgba(255,255,255,0.18)" stroke-width="1">
-            <line x1="0" y1="255" x2="0" y2="262"/>
-            <line x1="76" y1="255" x2="76" y2="262"/>
-            <line x1="152" y1="255" x2="152" y2="262"/>
-            <line x1="228" y1="255" x2="228" y2="262"/>
-            <line x1="304" y1="255" x2="304" y2="262"/>
-            <line x1="380" y1="255" x2="380" y2="262"/>
-            <line x1="456" y1="255" x2="456" y2="262"/>
-          </g>
-          <path d="M0,60 C 90,75 150,120 220,165 C 300,205 360,235 460,248"
-                fill="none" stroke="var(--fossil)" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M0,240 C 90,225 150,190 220,150 C 300,100 360,60 460,35"
-                fill="none" stroke="var(--renew)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="222" cy="158" r="4.5" fill="var(--amber)"/>
-          <line x1="222" y1="158" x2="222" y2="255" stroke="var(--amber)" stroke-width="1" stroke-dasharray="3 4"/>
-          <text x="228" y="272" fill="var(--amber)" font-family="IBM Plex Mono, monospace" font-size="11">{tipping}</text>
-          <circle cx="460" cy="248" r="3.5" fill="var(--fossil)"/>
-          <circle cx="460" cy="35" r="3.5" fill="var(--renew)"/>
-        </svg>
-        <div class="chart-caption">
-          <span><i class="dot" style="background:var(--fossil)"></i><span>{fossil}</span></span>
-          <span><i class="dot" style="background:var(--renew)"></i><span>{renew}</span></span>
-        </div>
-      </div>
-"""
-
-
 def home_body(lang):
     fr = lang == "fr"
     eyebrow = "Économiste de l'énergie · Doctorant, Université de Sherbrooke" if fr else \
@@ -188,12 +183,6 @@ def home_body(lang):
     cta1_href = page_href(lang, "research")
     cta2_href = page_href(lang, "about")
 
-    chart = HERO_SVG.format(
-        tipping="point de bascule" if fr else "tipping point",
-        fossil="part fossile" if fr else "fossil share",
-        renew="part renouvelable" if fr else "renewable share",
-    )
-
     intro_label = "Doctorant en économie à l'Université de Sherbrooke, au Québec (Canada)" if fr else \
         "PhD candidate in Economics at Université de Sherbrooke, Québec (Canada)"
     intro_p = ("Je suis économiste spécialisé dans la transition énergétique et l'adoption des technologies "
@@ -206,7 +195,7 @@ def home_body(lang):
     more_href = page_href(lang, "about")
 
     return f"""
-  <section class="hero">
+  <section class="hero banner-photo" style="{banner_style(lang, 'home')}">
     <div class="container">
       <div class="hero-text">
         <span class="hero-eyebrow">{eyebrow}</span>
@@ -217,7 +206,6 @@ def home_body(lang):
           <a class="btn btn-ghost" href="{cta2_href}">{cta2_label}</a>
         </div>
       </div>
-      {chart}
     </div>
   </section>
 
@@ -231,6 +219,7 @@ def home_body(lang):
     </div>
   </section>
 """
+
 
 
 def about_body(lang):
@@ -266,7 +255,7 @@ def about_body(lang):
     alt = "Portrait de N'Goran Sylvain N'DRI" if fr else "Portrait of N'Goran Sylvain N'DRI"
 
     return f"""
-  <section class="page-banner">
+  <section class="page-banner banner-photo" style="{banner_style(lang, 'about')}">
     <div class="container">
       <span class="eyebrow">{eyebrow}</span>
       <h1>{title}</h1>
@@ -341,7 +330,7 @@ def research_body(lang):
     items_html = "\n".join(items)
 
     return f"""
-  <section class="page-banner">
+  <section class="page-banner banner-photo" style="{banner_style(lang, 'research')}">
     <div class="container">
       <span class="eyebrow">{eyebrow}</span>
       <h1>{title}</h1>
@@ -436,7 +425,7 @@ def projects_body(lang):
     cards_html = "\n".join(cards)
 
     return f"""
-  <section class="page-banner">
+  <section class="page-banner banner-photo" style="{banner_style(lang, 'projects')}">
     <div class="container">
       <span class="eyebrow">{eyebrow}</span>
       <h1>{title}</h1>
@@ -449,6 +438,57 @@ def projects_body(lang):
       <div class="project-grid">
 {cards_html}
       </div>
+    </div>
+  </section>
+"""
+
+
+# Liste des articles de blog. Vide pour l'instant — la page affiche un
+# message d'attente tant qu'elle est vide. Pour publier un article, ajoutez
+# un dict ici (voir le README pour le format), puis relancez build.py.
+BLOG_POSTS = [
+    # {"date": "2026-09-01", "title_fr": "Titre en français", "title_en": "Title in English",
+    #  "excerpt_fr": "Résumé en français.", "excerpt_en": "Summary in English."},
+]
+
+
+def blog_body(lang):
+    fr = lang == "fr"
+    eyebrow = "Journal" if fr else "Journal"
+    title = "Blog" if fr else "Blog"
+    lede = ("Réflexions et actualités sur la transition énergétique et la recherche en cours." if fr else
+            "Thoughts and updates on the energy transition and ongoing research.")
+
+    if not BLOG_POSTS:
+        empty_msg = ("Aucun article publié pour l'instant&nbsp;— revenez bientôt." if fr else
+                      "No posts published yet — check back soon.")
+        list_html = f'<p style="color:var(--ink-soft);">{empty_msg}</p>'
+    else:
+        items = []
+        for post in BLOG_POSTS:
+            post_title = post["title_fr"] if fr else post["title_en"]
+            post_excerpt = post["excerpt_fr"] if fr else post["excerpt_en"]
+            items.append(f"""        <li class="paper-item">
+          <span class="paper-year">{post['date']}</span>
+          <div>
+            <p class="paper-title">{post_title}</p>
+            <p class="paper-coauthors">{post_excerpt}</p>
+          </div>
+        </li>""")
+        list_html = '<ul class="paper-list">\n' + "\n".join(items) + "\n      </ul>"
+
+    return f"""
+  <section class="page-banner banner-photo" style="{banner_style(lang, 'blog')}">
+    <div class="container">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>{title}</h1>
+      <p>{lede}</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      {list_html}
     </div>
   </section>
 """
@@ -470,7 +510,7 @@ def cv_body(lang):
               "names above to activate these buttons.")
 
     return f"""
-  <section class="page-banner">
+  <section class="page-banner banner-photo" style="{banner_style(lang, 'cv')}">
     <div class="container">
       <span class="eyebrow">{eyebrow}</span>
       <h1>{title}</h1>
@@ -508,7 +548,7 @@ def contact_body(lang):
     rg_hint = "publications" if fr else "publications"
 
     return f"""
-  <section class="contact-section">
+  <section class="contact-section banner-photo" style="{banner_style(lang, 'contact')}">
     <div class="container contact-grid">
       <div>
         <span class="eyebrow">{eyebrow}</span>
@@ -533,6 +573,7 @@ BODY_BUILDERS = {
     "about": about_body,
     "research": research_body,
     "projects": projects_body,
+    "blog": blog_body,
     "cv": cv_body,
     "contact": contact_body,
 }

@@ -12,6 +12,7 @@ GitHub Pages.
 ├── a-propos.html         À propos
 ├── recherche.html        Recherche
 ├── projets.html          Projets
+├── blog.html             Blog
 ├── cv.html               CV
 ├── contact.html          Contact
 ├── en/
@@ -19,6 +20,7 @@ GitHub Pages.
 │   ├── about.html
 │   ├── research.html
 │   ├── projects.html
+│   ├── blog.html
 │   ├── cv.html
 │   └── contact.html
 ├── assets/
@@ -26,14 +28,46 @@ GitHub Pages.
 │   ├── js/script.js       menu mobile uniquement
 │   ├── img/portrait.png   photo de profil
 │   ├── img/logo.png       logo (affiché dans l'en-tête, sur les 12 pages)
+│   ├── img/banners/       vos photos de bannière, une par section (voir ci-dessous)
 │   └── cv/                déposez ici vos fichiers CV (voir ci-dessous)
-├── build.py              script qui a généré les 12 pages (facultatif à garder)
+├── build.py              script qui a généré les 14 pages (facultatif à garder)
 └── README.md
 ```
 
 Chaque page française porte un lien « EN » vers sa page anglaise équivalente,
 et vice-versa — ce sont de simples liens `<a href>`, donc rien ne peut
 « ne pas marcher » comme avec un bouton JavaScript.
+
+## Ajouter vos photos de bannière
+
+Chaque section a sa propre bannière (le bandeau sombre en haut de page, avec
+le texte écrit par-dessus) et peut afficher une photo différente. Déposez vos
+images dans `assets/img/banners/` sous ces noms exacts :
+
+| Fichier attendu                   | Section                     |
+|------------------------------------|------------------------------|
+| `assets/img/banners/home.jpg`      | Accueil (grande bannière)   |
+| `assets/img/banners/about.jpg`     | À propos                    |
+| `assets/img/banners/research.jpg`  | Recherche                   |
+| `assets/img/banners/projects.jpg`  | Projets                      |
+| `assets/img/banners/blog.jpg`      | Blog                          |
+| `assets/img/banners/cv.jpg`        | CV                            |
+| `assets/img/banners/contact.jpg`   | Contact                       |
+
+La même photo sert aux deux langues (FR et EN) d'une même section — inutile
+d'en dupliquer une pour `/en/`. Tant qu'un fichier n'existe pas encore, la
+bannière correspondante affiche simplement le fond vert sapin, sans rien
+casser.
+
+Conseils pratiques :
+- Format paysage, au moins 1600px de large, en `.jpg` (remplacez l'extension
+  dans `build.py`, dictionnaire `BANNER_IMAGES`, si vous préférez `.png` ou
+  `.webp`).
+- Le texte est toujours blanc et placé à gauche, sur un dégradé sombre qui
+  s'assure qu'il reste lisible quelle que soit la photo — inutile d'assombrir
+  vous-même vos photos avant de les déposer.
+- Pour changer les noms de fichiers ou le dossier, modifiez le dictionnaire
+  `BANNER_IMAGES` en haut de `build.py`, puis relancez `python3 build.py`.
 
 ## Modifier le contenu
 
@@ -48,13 +82,33 @@ Deux façons de faire, au choix :
   ```bash
   python3 build.py
   ```
-  Cela régénère les 12 fichiers HTML à l'identique de la structure actuelle.
+  Cela régénère les 14 fichiers HTML à l'identique de la structure actuelle.
   Le script n'est utile qu'au moment où vous éditez le contenu — le site
   publié reste du HTML/CSS/JS statique, sans aucune dépendance à Python.
 
+## Publier un article de blog
+
+La page Blog est vide par défaut (elle affiche « Aucun article publié pour
+l'instant »). Pour ajouter un article, ouvrez `build.py` et repérez la liste
+`BLOG_POSTS` (juste avant `def blog_body`). Ajoutez-y un dict par article,
+en français ET en anglais :
+
+```python
+BLOG_POSTS = [
+    {"date": "2026-09-01",
+     "title_fr": "Titre de l'article", "title_en": "Post title",
+     "excerpt_fr": "Résumé en une phrase.", "excerpt_en": "One-sentence summary."},
+]
+```
+
+Le plus récent en premier. Puis relancez `python3 build.py` — la page Blog
+liste automatiquement chaque entrée, en FR sur `blog.html` et en EN sur
+`en/blog.html`. Pour un article complet (pas seulement un résumé), il faudra
+une page dédiée par article ; dites-le-moi et je mets ça en place.
+
 ## À compléter avant publication
 
-Trois choses ont été laissées en attente le temps que vous ayez les vraies
+Quatre choses ont été laissées en attente le temps que vous ayez les vraies
 informations (cherchez `TODO` dans les fichiers, ou le texte « pas encore en
 ligne » sur la page CV) :
 
@@ -64,6 +118,8 @@ ligne » sur la page CV) :
    `contact.html` et `en/contact.html` par votre adresse réelle.
 3. **Réseaux** — remplacez les `href="#"` de LinkedIn, ORCID et ResearchGate
    par vos liens réels, dans les deux pages contact.
+4. **Photos de bannière** — déposez vos 7 photos dans `assets/img/banners/`
+   (voir la section précédente pour les noms de fichiers attendus).
 
 ## Publier sur GitHub Pages
 
